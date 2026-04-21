@@ -1,0 +1,84 @@
+/* ── AquaStation — Auth Pages CSS ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+    --bg: #060f1e; --surface: #0d1b2e; --border: rgba(0,200,255,0.1);
+    --cyan: #00d4ff; --cyan-dim: rgba(0,212,255,0.12);
+    --yellow: #ffcc00; --text: #e8f4ff; --muted: #5a7a9a; --red: #ff4d6d;
+}
+html, body { height: 100%; }
+body {
+    font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text);
+    min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+/* Subtle background glow */
+.admin-page::before  { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse 70% 50% at 20% 80%, rgba(255,153,0,.08), transparent 55%), radial-gradient(ellipse 50% 45% at 80% 20%, rgba(255,204,0,.06), transparent 50%); }
+.cashier-page::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse 70% 50% at 20% 80%, rgba(0,212,255,.09), transparent 55%), radial-gradient(ellipse 55% 45% at 80% 20%, rgba(13,79,163,.12), transparent 55%); }
+
+/* Bubbles */
+.bubbles { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+.b { position: absolute; bottom: -80px; border-radius: 50%; animation: rise linear infinite; }
+.admin-page  .b { background: rgba(255,204,0,.04); border: 1px solid rgba(255,204,0,.08); }
+.cashier-page .b { background: rgba(0,212,255,.05); border: 1px solid rgba(0,212,255,.1); }
+.b:nth-child(1){width:16px;height:16px;left:12%;animation-duration:10s}
+.b:nth-child(2){width:10px;height:10px;left:30%;animation-duration:7s;animation-delay:2s}
+.b:nth-child(3){width:22px;height:22px;left:50%;animation-duration:12s;animation-delay:1s}
+.b:nth-child(4){width:14px;height:14px;left:70%;animation-duration:8s;animation-delay:3s}
+.b:nth-child(5){width:18px;height:18px;left:88%;animation-duration:11s;animation-delay:.5s}
+@keyframes rise { 0%{transform:translateY(0);opacity:0} 8%{opacity:1} 92%{opacity:.4} 100%{transform:translateY(-110vh);opacity:0} }
+
+/* Card */
+.card {
+    position: relative; z-index: 10; width: 420px; max-width: 95vw;
+    border-radius: 24px; padding: 44px 40px;
+    backdrop-filter: blur(20px); box-shadow: 0 24px 70px rgba(0,0,0,.55);
+    animation: cardIn .55s cubic-bezier(.22,1,.36,1);
+}
+.admin-page  .card { background: rgba(26,20,0,.88);  border: 1px solid rgba(255,204,0,.2); }
+.cashier-page .card { background: rgba(13,27,46,.9); border: 1px solid rgba(0,212,255,.18); }
+@keyframes cardIn { from { opacity:0; transform:translateY(24px) scale(.97); } to { opacity:1; transform:none; } }
+
+/* Logo */
+.logo { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.logo-icon { width: 46px; height: 46px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+.admin-page  .logo-icon { background: linear-gradient(135deg,#cc8800,#ffcc00); box-shadow: 0 0 20px rgba(255,204,0,.2); }
+.cashier-page .logo-icon { background: linear-gradient(135deg,#0d6efd,#00d4ff); box-shadow: 0 0 20px rgba(0,212,255,.22); }
+.logo-text h1 { font-family: 'Syne', sans-serif; font-size: 19px; font-weight: 800; }
+.logo-text p  { font-size: 11px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px; }
+
+/* Portal tag */
+.portal-tag {
+    display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px;
+    border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: .8px;
+    text-transform: uppercase; margin-bottom: 20px;
+}
+.admin-page  .portal-tag { background: rgba(255,204,0,.1); border: 1px solid rgba(255,204,0,.25); color: var(--yellow); }
+.cashier-page .portal-tag { background: var(--cyan-dim); border: 1px solid rgba(0,212,255,.25); color: var(--cyan); }
+
+/* Headings */
+h2 { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+.subtitle { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+
+/* Form */
+.form-group { margin-bottom: 18px; }
+label { display: block; font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: .8px; text-transform: uppercase; margin-bottom: 7px; }
+input { width: 100%; border-radius: 11px; padding: 13px 15px; font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--text); outline: none; transition: all .2s; }
+input::placeholder { color: rgba(90,122,154,.5); }
+.admin-page  input { background: rgba(255,255,255,.03); border: 1px solid rgba(255,204,0,.15); }
+.admin-page  input:focus { border-color: var(--yellow); background: rgba(255,204,0,.04); box-shadow: 0 0 0 3px rgba(255,204,0,.08); }
+.cashier-page input { background: rgba(255,255,255,.04); border: 1px solid var(--border); }
+.cashier-page input:focus { border-color: var(--cyan); background: rgba(0,212,255,.04); box-shadow: 0 0 0 3px rgba(0,212,255,.08); }
+
+/* Error */
+.error-msg { background: rgba(255,77,109,.1); border: 1px solid rgba(255,77,109,.25); border-radius: 10px; padding: 11px 14px; font-size: 13px; color: #ff8080; margin-bottom: 18px; }
+
+/* Button */
+.btn-login { width: 100%; padding: 14px; border: none; border-radius: 12px; font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: all .25s; margin-top: 6px; }
+.admin-page  .btn-login { background: linear-gradient(135deg,#cc8800,#ffcc00); color: #1a1400; box-shadow: 0 4px 20px rgba(255,204,0,.2); }
+.admin-page  .btn-login:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,204,0,.35); }
+.cashier-page .btn-login { background: linear-gradient(135deg,#0d6efd,#00d4ff); color: #060f1e; box-shadow: 0 4px 20px rgba(0,212,255,.22); }
+.cashier-page .btn-login:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,212,255,.38); }
+
+/* Note */
+.note { margin-top: 20px; padding: 12px 14px; border-radius: 10px; font-size: 12px; color: var(--muted); line-height: 1.5; }
+.admin-page  .note { background: rgba(255,204,0,.05); border: 1px solid rgba(255,204,0,.1); }
+.cashier-page .note { background: rgba(0,212,255,.05); border: 1px solid rgba(0,212,255,.1); }
